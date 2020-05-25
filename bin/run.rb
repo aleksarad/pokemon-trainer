@@ -1,3 +1,5 @@
 require_relative '../config/environment'
 
-puts "hello world"
+interface = Interface.new
+interface.train
+interface.continue_training_or_exit
