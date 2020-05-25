@@ -40,6 +40,10 @@ class Interface
     def learn_a_new_move
     end
 
+    def new_move_validation
+
+    end
+    
     def continue_training_or_exit
         answer = prompt.select("Continue training or exit?", ["Continue training", "Exit"])
         if answer == "Exit"
