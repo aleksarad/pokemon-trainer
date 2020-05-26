@@ -1,3 +1,5 @@
+require "colorize"
+
 class Interface
     attr_accessor :prompt, :pokemon, :pokemon_instance, :chosen_pokemon
 
@@ -21,20 +23,20 @@ class Interface
 
     def self.learn_loading
         3.times do |x|
-            print "｡･:*:･ﾟ"
+            print "｡･:*:･ﾟ".colorize(:yellow)
             sleep(1)
         end
         sleep(1)
     end
-    "1... 2... and... Poof!"
+
     def self.delete_loading
-        print "1.. "
+        print "1.. ".colorize(:yellow)
         sleep(1)
-        print " 2.. "
+        print " 2.. ".colorize(:yellow)
         sleep(1)
-        print "and.. "
+        print "and.. ".colorize(:yellow)
         sleep(1)
-        print "Poof!"
+        print "Poof!".colorize(:yellow)
         sleep(1)
     end
 
@@ -91,7 +93,7 @@ class Interface
             @pokemon_instance.teach_move(chosen_move)
         else
             puts "\n"
-            puts "Max moves learned!"
+            puts "Max moves learned!".colorize(:light_red)
             puts "\n"
         end
     end
@@ -109,7 +111,7 @@ class Interface
     end
 
     def current_pokemon_stats
-        puts "[#{@chosen_pokemon}]"
+        puts "[#{@chosen_pokemon}]".colorize(:white).on_green.underline
         puts "Type: #{@pokemon_instance.poke_type}"
         puts "Current Moves:"
         puts @pokemon_instance.list_moves_names
@@ -117,3 +119,7 @@ class Interface
     end
 
 end
+
+# [:black, :light_black, :red, :light_red, :green,
+#  :light_green, :yellow, :light_yellow, :blue, :light_blue,
+#   :magenta, :light_magenta, :cyan, :light_cyan, :white, :light_white, :default]

@@ -7,7 +7,7 @@ class Ascii
         ██      ██    ██ ██  ██  ██      ██  ██  ██ ██    ██ ██  ██ ██        ██    ██   ██ ██   ██ ██ ██  ██ ██ ██      ██   ██ 
         ██       ██████  ██   ██ ███████ ██      ██  ██████  ██   ████        ██    ██   ██ ██   ██ ██ ██   ████ ███████ ██   ██ 
                                                                                                                        by Aleksa                                                                                                                          
-     ".colorize(:blue)  
+     ".colorize(:light_green)  
     end
 
 def self.pokeball

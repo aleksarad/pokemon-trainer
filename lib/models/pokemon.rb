@@ -10,11 +10,11 @@ class Pokemon < ActiveRecord::Base
         if !self.list_moves_names.include?(move_name)
             self.moves << new_move
             Interface.learn_loading
-            puts "#{self.name} learned #{move_name}!"
+            puts "#{self.name} learned #{move_name}!".colorize(:light_cyan)
             sleep(1)
             puts self.list_moves
         else
-           puts "#{self.name} already knows #{move_name}!"
+           puts "#{self.name} already knows #{move_name}!".colorize(:light_red)
         end
     end
 
@@ -39,7 +39,7 @@ class Pokemon < ActiveRecord::Base
             #{names[3]}
                 #{types[3]} #{category[3]}
         ⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒        
-       "
+       ".colorize(:cyan)
     end
 
     def list_moves_names
@@ -58,7 +58,7 @@ class Pokemon < ActiveRecord::Base
     def delete_move_from_pokemon(old_move)
         old_move_instance = self.moves.find_by name: old_move
         Interface.delete_loading
-        print " #{self.name} forgot #{old_move}!"
+        print " #{self.name} forgot #{old_move}!".colorize(:light_cyan)
         sleep(1)
         self.moves.delete(old_move_instance)
     end
