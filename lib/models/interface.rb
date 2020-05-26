@@ -3,6 +3,8 @@ class Interface
 
     def run
         Ascii.logo
+        self.start
+        puts "\n"
         self.train
     end
 
@@ -10,20 +12,42 @@ class Interface
         @prompt = TTY::Prompt.new
     end
 
+    def start 
+        prompt.select("Welcome to Pokemon Trainer!",["Start"])
+    end
+
+    def self.learn_loading
+        3.times do |x|
+            print "｡･:*:･ﾟ"
+            sleep(1)
+        end
+        sleep(1)
+    end
+    "1... 2... and... Poof!"
+    def self.delete_loading
+        print "1.. "
+        sleep(1)
+        print " 2.. "
+        sleep(1)
+        print "and.. "
+        sleep(1)
+        print "Poof!"
+        sleep(1)
+    end
+
     def select_pokemon
         @chosen_pokemon = prompt.select("Choose a pokemon to train", Pokemon.list_pokemon_names)
         @pokemon_instance = Pokemon.find_pokemon_instance(@chosen_pokemon)
+        puts "\n"
         puts "#{@chosen_pokemon}'s current moves:"
         puts @pokemon_instance.list_moves_names
-        puts "
-        "
+        puts "\n"
     end
 
     def train 
         self.select_pokemon
         response = prompt.select("Train #{@chosen_pokemon}?", ["Learn a new move", "Replace existing move", "Forget a move"])
 
-        #add an option to view moves?? or at least show all moves when learning a new move
         if response == "Learn a new move"
             self.learn_a_new_move
             self.continue_training_or_exit
