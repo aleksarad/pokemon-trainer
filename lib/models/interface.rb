@@ -18,12 +18,13 @@ class Interface
 
     #CLI Helpers
     def start 
-        prompt.select("These pokemon need your help learning some moves. They're counting on you!",["Start"])
+        prompt.select("These daycare pokemon need your help learning some moves. They're counting on you!",["Start"])
+        puts `afplay 'lib/music/SFX_Selection_Click_Beep_rdblu.mp3'`
     end
 
     def self.learn_loading
         3.times do |x|
-            print "｡･:*:･ﾟ".colorize(:yellow)
+            print "｡･:*:･ ﾟ".colorize(:yellow)
             sleep(1)
         end
         sleep(1)
@@ -40,6 +41,11 @@ class Interface
         sleep(1)
     end
 
+    def self.clear
+        system "clear"
+        Ascii.logo
+    end
+
     ##Functionality
     #Menus
 
@@ -52,6 +58,7 @@ class Interface
 
     #type of training menu
     def train 
+        Interface.clear
         self.current_pokemon_stats
         response = prompt.select("Train #{@chosen_pokemon}?", ["Learn a new move", "Replace existing move", "Forget a move"])
 
@@ -65,17 +72,21 @@ class Interface
             self.delete_move
             self.continue_training_or_exit
         end
+        # Interface.clear
     end
 
     #continue training or exit menu
     def continue_training_or_exit
         answer = prompt.select("Continue training or exit?", ["Continue training #{@chosen_pokemon}", "Train another pokemon", "Exit"])
         if answer == "Exit"
-            puts "\n The pokemon look so happy, come back and train any time! \n".colorize(:green)
+            Interface.clear
+            puts "\n The pokemon look so happy, please come back and train soon! \n".colorize(:green)
+            Ascii.pikachu
         elsif answer == "Continue training #{@chosen_pokemon}"
             puts "\n"
             self.train
         elsif answer == "Train another pokemon"
+            Interface.clear
             puts "\n"
             self.select_pokemon
             self.train
@@ -84,7 +95,9 @@ class Interface
 
     #Functionality helpers
     def display_moves
-        prompt.select("Choose a move", Move.list_move_names)
+        answer = prompt.select("Choose a move", Move.list_move_names)
+        answer_arr = answer.split(' - ')
+        remove_brackets = answer_arr[0].delete('[]')
     end
 
     def learn_a_new_move
@@ -120,6 +133,7 @@ class Interface
 
 end
 
+# Colorize color options:
 # [:black, :light_black, :red, :light_red, :green,
 #  :light_green, :yellow, :light_yellow, :blue, :light_blue,
 #   :magenta, :light_magenta, :cyan, :light_cyan, :white, :light_white, :default]

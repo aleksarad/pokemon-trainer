@@ -26,6 +26,8 @@ class Pokemon < ActiveRecord::Base
 
        puts "
 
+       #{self.name}'s Moves:
+        
         ⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒⌒
             #{names[0]}
                 #{types[0]} #{category[0]}
@@ -59,7 +61,7 @@ class Pokemon < ActiveRecord::Base
         old_move_instance = self.moves.find_by name: old_move
         Interface.delete_loading
         print " #{self.name} forgot #{old_move}!".colorize(:light_cyan)
-        sleep(1)
+        puts `afplay 'lib/music/SFX_Faint_No_HP_IMDOWN_rbysph.mp3'`
         self.moves.delete(old_move_instance)
     end
 
