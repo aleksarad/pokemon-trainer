@@ -11,7 +11,7 @@ class Pokemon < ActiveRecord::Base
             self.moves << new_move
             Interface.learn_loading
             puts "#{self.name} learned #{move_name}!".colorize(:light_cyan)
-            sleep(1)
+            puts `afplay 'lib/music/move_learned.mov'`
             puts self.list_moves
         else
            puts "#{self.name} already knows #{move_name}!".colorize(:light_red)
