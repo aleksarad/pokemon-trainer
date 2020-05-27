@@ -71,7 +71,7 @@ class Interface
     def continue_training_or_exit
         answer = prompt.select("Continue training or exit?", ["Continue training #{@chosen_pokemon}", "Train another pokemon", "Exit"])
         if answer == "Exit"
-            puts "Come back and train any time!"
+            puts "\n The pokemon look so happy, come back and train any time! \n".colorize(:green)
         elsif answer == "Continue training #{@chosen_pokemon}"
             puts "\n"
             self.train
@@ -111,7 +111,7 @@ class Interface
     end
 
     def current_pokemon_stats
-        puts "[#{@chosen_pokemon}]".colorize(:white).on_green.underline
+        puts " #{@chosen_pokemon} ".colorize(:white).on_green.underline
         puts "Type: #{@pokemon_instance.poke_type}"
         puts "Current Moves:"
         puts @pokemon_instance.list_moves_names

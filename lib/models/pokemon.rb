@@ -65,8 +65,12 @@ class Pokemon < ActiveRecord::Base
 
     #Update
     def update_move(old_move, new_move)
-        delete_move_from_pokemon(old_move)
-        teach_move(new_move)
+        if !self.list_moves_names.include?(new_move)
+            delete_move_from_pokemon(old_move)
+            teach_move(new_move)
+        else 
+            puts "#{self.name} already knows #{new_move}!".colorize(:light_red) 
+        end
     end
 end
 
