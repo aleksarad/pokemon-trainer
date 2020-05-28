@@ -8,6 +8,8 @@ class Pokemon < ActiveRecord::Base
 
         if !self.list_moves_names.include?(move_name)
             self.moves << new_move
+            self.move_learned_animation_and_sound(move_name)
+            self.list_moves
         else
            puts "#{self.name} already knows #{move_name}!".colorize(:light_red)
         end
@@ -15,14 +17,15 @@ class Pokemon < ActiveRecord::Base
 
     def delete_move_from_pokemon(old_move)
         old_move_instance = self.moves.find_by name: old_move
-
         self.moves.delete(old_move_instance)
+        self.move_deleted_animation_and_sound(old_move)
     end
 
     def update_move(old_move, new_move)
         if !self.list_moves_names.include?(new_move)
             delete_move_from_pokemon(old_move)
             teach_move(new_move)
+            # self.move_updated_animation_and_sound(old_move, new_move)
         else 
             puts "#{self.name} already knows #{new_move}!".colorize(:light_red) 
         end
@@ -102,5 +105,28 @@ class Pokemon < ActiveRecord::Base
         "#{self.name} is jumping around!",
         "#{self.name} made a noise!"].sample
     end
+
+    def move_learned_animation_and_sound(move_name)
+        Interface.learn_loading
+        puts "#{self.name} learned #{move_name}!".colorize(:light_cyan)
+        puts `afplay 'lib/music/move_learned.mov'`
+        # puts "\n #{self.random_message}"
+    end
+
+    def move_deleted_animation_and_sound(move_name)
+        Interface.delete_loading
+        print " #{self.name} forgot #{move_name}!".colorize(:light_cyan)
+        puts `afplay 'lib/music/SFX_Faint_No_HP_IMDOWN_rbysph.mp3'`
+        # puts "\n #{self.random_message}"
+    end
+
+    # def move_updated_animation_and_sound(old_move, new_move)
+    #     Interface.learn_loading
+    #     puts "#{self.name} forgot #{old_move} and learned #{new_move}!".colorize(:light_cyan)
+    #     puts `afplay 'lib/music/move_learned.mov'`
+    #     puts "\n #{self.random_message}"
+    #     self.list_moves
+    # end
+
 end
 

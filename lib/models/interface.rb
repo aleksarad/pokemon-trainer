@@ -71,7 +71,6 @@ class Interface
         if self.pokemon_instance.moves.length < 4
             chosen_move = self.display_moves
             self.pokemon_instance.teach_move(chosen_move)
-            self.move_learned_animation_and_sound(chosen_move)
         else
             puts "\n Max moves learned! \n".colorize(:light_red)
         end
@@ -82,7 +81,6 @@ class Interface
             old_move = prompt.select("Select a move to replace", self.pokemon_instance.list_moves_names)
             new_move = self.display_moves
             self.pokemon_instance.update_move(old_move, new_move)
-            self.move_updated_animation_and_sound(old_move, new_move)
         else 
             puts "#{self.chosen_pokemon} doesn't know any moves to replace!".colorize(:red)
         end
@@ -92,7 +90,7 @@ class Interface
         if pokemon_instance.moves.length !=0
             delete_move = prompt.select("Select a move to forget", self.pokemon_instance.list_moves_names)
             self.pokemon_instance.delete_move_from_pokemon(delete_move)
-            self.move_deleted_animation_and_sound(delete_move)
+            self.pokemon_instance.list_moves
         else 
             puts "#{self.chosen_pokemon} doesn't know any moves yet!".colorize(:red)
         end
@@ -135,30 +133,6 @@ class Interface
     def self.clear
         system "clear"
         Ascii.logo
-    end
-
-    def move_learned_animation_and_sound(move_name)
-        Interface.learn_loading
-        puts "#{self.pokemon_instance.name} learned #{move_name}!".colorize(:light_cyan)
-        puts `afplay 'lib/music/move_learned.mov'`
-        puts "\n #{self.pokemon_instance.random_message}"
-        self.pokemon_instance.list_moves
-    end
-
-    def move_deleted_animation_and_sound(move_name)
-        Interface.delete_loading
-        print " #{self.pokemon_instance.name} forgot #{move_name}!".colorize(:light_cyan)
-        puts `afplay 'lib/music/SFX_Faint_No_HP_IMDOWN_rbysph.mp3'`
-        puts "\n #{self.pokemon_instance.random_message}"
-        self.pokemon_instance.list_moves
-    end
-
-    def move_updated_animation_and_sound(old_move, new_move)
-        Interface.learn_loading
-        puts "#{self.pokemon_instance.name} forgot #{old_move} and learned #{new_move}!".colorize(:light_cyan)
-        puts `afplay 'lib/music/move_learned.mov'`
-        puts "\n #{self.pokemon_instance.random_message}"
-        self.pokemon_instance.list_moves
     end
 
     def exit_music_and_message
