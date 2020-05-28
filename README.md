@@ -15,6 +15,7 @@ You will be able to:
 Ruby, ActiveRecord, Rake, TTYPrompt, Colorize 
 
 ## Features ##
+* CRUD functionality
 * Easy to navigate menus so that you can easily switch between Pokemon or keep bonding with the same one.
 * ASCII art, animations, music and general cuteness :)
 

@@ -82,7 +82,7 @@ class Interface
             new_move = self.display_moves
             self.pokemon_instance.update_move(old_move, new_move)
         else 
-            puts "#{self.chosen_pokemon} doesn't know any moves to replace!".colorize(:red)
+            puts "\n #{self.chosen_pokemon} doesn't know any moves to replace! \n".colorize(:red)
         end
     end
 
@@ -90,14 +90,13 @@ class Interface
         if pokemon_instance.moves.length !=0
             delete_move = prompt.select("Select a move to forget", self.pokemon_instance.list_moves_names)
             self.pokemon_instance.delete_move_from_pokemon(delete_move)
-            self.pokemon_instance.list_moves
         else 
-            puts "#{self.chosen_pokemon} doesn't know any moves yet!".colorize(:red)
+            puts "\n #{self.chosen_pokemon} doesn't know any moves yet! \n".colorize(:red)
         end
     end
 
     def current_pokemon_stats
-        puts " #{self.chosen_pokemon} ".colorize(:white).on_green.underline
+        puts " #{self.chosen_pokemon} ".colorize(:black).on_green
         puts "Type: #{self.pokemon_instance.poke_type}"
         puts "Current Moves:"
         puts self.pokemon_instance.list_moves_names
@@ -112,6 +111,7 @@ class Interface
     end
 
     def self.learn_loading
+        puts "\n"
         3.times do |x|
             print "｡･:*:･ ﾟ".colorize(:yellow)
             sleep(1)
@@ -120,13 +120,14 @@ class Interface
     end
 
     def self.delete_loading
+        puts "\n"
         print "1.. ".colorize(:yellow)
         sleep(1)
         print " 2.. ".colorize(:yellow)
         sleep(1)
         print "and.. ".colorize(:yellow)
         sleep(1)
-        print "Poof!".colorize(:yellow)
+        print "Poof! ".colorize(:yellow)
         sleep(1)
     end
 
@@ -141,4 +142,5 @@ class Interface
         Ascii.pikachu
         puts `afplay 'lib/music/pikachu.mp3'`
     end
+
 end
